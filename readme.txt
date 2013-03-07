@@ -13,6 +13,8 @@ IntelliAds inserts IntelliChristian! Ads automatically into all pages, posts and
 
 Just activate and do 2 settings.....
 
+Oh and don't forget to create a publisher account at ppc.intellichristian.com to get paid for clicks.
+
 == Installation ==
 
 1. Upload `intelliads` folder to the `/wp-content/plugins/` directory .
