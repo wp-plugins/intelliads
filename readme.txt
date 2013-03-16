@@ -1,24 +1,24 @@
 === IntelliAds Plugin ===
 Contributors: DJ Alex
-Tags: intellichristian payperclick ads,christian ads,christian advertising,christian payperclick,ads,advertising
+Tags: intellichristian payperclick ads,christian ads,christian advertising,christian payperclick,ads,advertising,adsense alternative
 Requires at least: 2.5
-Tested up to: 3.2.1
-Stable tag: 1.1
+Tested up to: 3.5.1
+Stable tag: 1.2
 
-IntelliAds automatically inserts optimized IntelliChristian! Ads into all of your Blog Pages within seconds. Click and monetize. 
+IntelliAds plugin helps you to insert IntelliChristian! Ads into your wordpress-powered site pages. 
 
 == Description ==
 
-IntelliAds inserts IntelliChristian! Ads automatically into all pages, posts and archives of your website. Optimized positions and sizes are used automatically to get the best compromize between minimum effect on weblayout and maximum income. 
+Insert different ad codes into different areas of your pages.
 
-Just activate and do 2 settings.....
+Version 1.2 is very different from version 1.1 of the plugin, due to a change in the format of ad codes for IntelliChristian! ads.
 
-Oh and don't forget to create a publisher account at ppc.intellichristian.com to get paid for clicks.
+You will need to create a publisher account at ppc.intellichristian.com to get paid for clicks.
 
 == Installation ==
 
 1. Upload `intelliads` folder to the `/wp-content/plugins/` directory .
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Settings can be configured in the 'Options' area of your blog.
+3. Settings can be configured in the plugins area of your blog.
 
 
