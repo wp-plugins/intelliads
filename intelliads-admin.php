@@ -286,7 +286,7 @@
 
 <div class="wrap">
 
-<h2>Quick Adsense <?php _e('Setting'); ?> <span style="font-size:9pt;font-style:italic">( Version <?php echo($QData['Version']) ?> )</span></h2>
+<h2>IntelliAds <?php _e('Setting'); ?> <span style="font-size:9pt;font-style:italic">( Version <?php echo($QData['Version']) ?> )</span></h2>
 
 
 
@@ -304,7 +304,7 @@
 
 	<tr valign="top">
 
-		<td style="width:110px"><?php _e('Adsense :'); ?></td>
+		<td style="width:110px"><?php _e('Number of Ads:'); ?></td>
 
 		<td><?php _e('Place up to '); ?><select name="AdsDisp" style="width:50px;font-weight:bold">
 
