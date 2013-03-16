@@ -11,6 +11,10 @@ IntelliAds plugin helps you to insert IntelliChristian! Ads into your wordpress-
 
 Insert different ad codes into different areas of your pages.
 
+Choose which types of pages to display ads on.
+
+Ability to hide ads for logged in users.
+
 Version 1.2 is very different from version 1.1 of the plugin, due to a change in the format of ad codes for IntelliChristian! ads.
 
 You will need to create a publisher account at ppc.intellichristian.com to get paid for clicks.
@@ -19,6 +23,6 @@ You will need to create a publisher account at ppc.intellichristian.com to get p
 
 1. Upload `intelliads` folder to the `/wp-content/plugins/` directory .
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Settings can be configured in the plugins area of your blog.
+3. Settings can be configured under the 'Settings' tab in your dashboard.
 
 
