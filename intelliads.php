@@ -34,8 +34,8 @@
 */
 
 global $QData;
-$QData['AdsWid'] = 1; /* Ads on Widget */
-$QData['Ads'] = 1; /* Ads on Post body */
+$QData['AdsWid'] = 3; /* Ads on Widget */
+$QData['Ads'] = 3; /* Ads on Post body */
 $QData['Name'] = 'IntelliAds';
 $QData['Version'] = '1.2';
 $QData['URI'] = 'http://ppc.intellichristian.com';
