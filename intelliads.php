@@ -1,223 +1,821 @@
 <?php
 
-/*
-Plugin Name: IntelliAds
-Plugin URI: http://alekseyshosting.co.cc/
-Descriptiion: IntelliChristian! Ads automatically within seconds. 
-Version: 1.1
-Author: DJ Alex
-Author URI: http://alekseyshoting.co.cc/
+
+
+/* 
+
+	Plugin Name: IntelliAds
+	Plugin URI: http://ppc.intellichristian.com
+	Description: Insert IntelliChristian! Ads into various places in your blog posts
+	Author: DJ Alex
+	Version: 1.2
+	Author URI: http://ppc.intellichristian.com
+
 */
 
- if (!class_exists("oneclickintelliads")) { 
- 	class oneclickintelliads { 
- 	var $adspacesharing=1; 
- 	var $version = "1.0"; 
- 	var $postcount = 0; 
- 	var $opts; 
- 	var $sizes; 
- 	var $color;
- 	function oneclickintelliads() { 
- 		$this->sizes=array(); 
- 		$this->sizes[]=array('desc'=>'Leaderboard (728 x 90)', 'text'=>'728 X 90'); 
- 		$this->sizes[]=array('desc'=>'Full Banner (468 x 60)', 'text'=>'468 X 60'); 
- 		$this->sizes[]=array('desc'=>'Half-Banner (234 x 60)', 'text'=>'234 X 60'); 
- 		$this->sizes[]=array('desc'=>'Skyscraper (120 x 600)', 'text'=>'120 X 600'); 
- 		$this->sizes[]=array('desc'=>'Wide Skyscraper (160 x 600)', 'text'=>'160 X 600'); 
- 		$this->sizes[]=array('desc'=>'Vertical Banner (120 x 240)', 'text'=>'120 X 240'); 
- 		$this->sizes[]=array('desc'=>'Button (125 x 125)', 'text'=>'125 X 125'); 
- 		$this->sizes[]=array('desc'=>'Small Rectangle (180 x 150)', 'text'=>'180 X 150'); 
- 		$this->sizes[]=array('desc'=>'Square Box (250 x 250)', 'text'=>'250 X 250'); 
- 		$this->sizes[]=array('desc'=>'Medium Rectangle (300 x 250)', 'text'=>'300 X 250'); 
- 		$this->sizes[]=array('desc'=>'Large Rectangle (336 x 280)', 'text'=>'336 X 280 '); 
- 		$this->getOpts(); 
- 		} 
- 	function getOpts() {
- 		$this->opts=get_option("oneclickintelliads"); 
- 		if (!empty($this->opts)) 
- 			{return;} 
- 		$this->opts=Array ( 'gen_id' => '', 'gen_channel' => '', 'border' => '', 'bg' => '', 'link' => '', 'text' => '', 'url' => '', 'moreopts' => 0, 'single1' => 1, 'single2' => 1, 'single3' => 1, 'multi1' => 1, 'multi2' => 1, 'multi3' => 1, 'ss1' => '250x250', 'ss2' => '728x90', 'ss3' => '125x125', 'ms1' => '468x60', 'ms2' => '120x600', 'ms3' => '728x90', 'lenForThirdAd' => 2000 ) ; 
- 		}
- 	function save_opts() {
- 		update_option('oneclickadsense',$this->opts); 
- 		}  
- 	function admin_menu() {
- 		 ?>
-		<script type="text/javascript">
-		function toggleMoreopts() {
-			if (!document.getElementById("moreoptscheckbox").checked) jQuery("div#moreopts").hide(100);
-			else jQuery("div#moreopts").show(500);
-		}	</script>
-		<?php if (isset($_POST["oneclickintelliads_update"])) { 
-			$this->opts=$_POST['oneclick']; 
-			$this->save_opts(); 
-			echo '<div id="message" class="updated fade"><p><strong>Options Saved!!</strong></p></div>'; 
-			} 
-			echo ('<div class="wrap"><h2>IntelliAds'. 
-			$this->version.'</h2><p>Insert IntelliChristian! Ads to all of your blog sites automatically. IntelliAds uses optimized sizes and positions for best monetization. For support check the <a href="http://alekseyshosting.co.cc">Plugin Homepage</a>. The most commonly used color codes are provided in the paranthesis. To quickly find other color codes, you can use the "Ad Code Wizard" inside your publisher account at <a href="http://ppc.intellichristian.com">ppc.intellichristian.com</a> </p>'); 
-    	?>
-    
-    	<form name="optionform" method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-
-	<br>IntelliChristian! Ads Publisher ID: <input name="oneclick[gen_id]" type="text" size="25" value="<?php echo $this->opts['gen_id'];?>">			
-	<br><br>Ad Border Color (White is "FFFFFF"): <input name="oneclick[border]" type="text" size="25" value="<?php echo $this->opts['border'];?>">
-	<br><br>Ad Background Color (White is "FFFFFF"): <input name="oneclick[bg]" type="text" size="25" value="<?php echo $this->opts['bg'];?>">
-	<br><br>Ad Headline Color (Green is "006600"): <input name="oneclick[link]" type="text" size="25" value="<?php echo $this->opts['link'];?>">
-	<br><br>Ad Text Body Color (Black is "000000"): <input name="oneclick[text]" type="text" size="25" value="<?php echo $this->opts['text'];?>">
-	<br><br>Ad URL Color (Blue is "000099"): <input name="oneclick[url]" type="text" size="25" value="<?php echo $this->opts['url'];?>">
-	<br>Use the IntelliChristian! Ads channel number ('1' is for "Christian"): <input name="oneclick[gen_channel]" type="text" size="25" value="<?php echo $this->opts['gen_channel'];?>">
 
 
-	
+/*	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-			<?php echo ('<br><br><input type="checkbox" name="oneclick[moreopts]" id="moreoptscheckbox" onchange="toggleMoreopts()" value="1" '); 
-			if ($this->opts['moreopts']) echo (' checked '); echo ('> OneClick does great work, but I want more control.<br>'); ?>
 
-	 		<div id="moreopts">
-	 	
-	 		<h4>Ads for single Posts and Pages</h4>
-	 		<input type="checkbox" name="oneclick[single1]" <?php if($this->opts['single1']) echo("checked");?>>Show 1st Ad at Top of page on right side of Post with <select name="oneclick[ss1]" size="1"><?php $this->printsizeselect($this->opts['ss1']); ?></select> pixels.
-	 		<br><input type="checkbox" name="oneclick[single2]" <?php if($this->opts['single2']) echo("checked");?>>Show 2nd Ad at Bottom of Post with <select name="oneclick[ss2]" size="1"><?php $this->printsizeselect($this->opts['ss2']); ?></select> pixels..
-	 	
-	 	
-	 		<br><input type="checkbox" name="oneclick[single3]" <?php if($this->opts['single3']) echo("checked");?>>Show 3rd Ad in the middle of Post if it is longer than <input name="oneclick[lenForThirdAd]" value="<?php echo $this->opts['lenForThirdAd'];?>"size="5"> characters with <select name="oneclick[ss3]" size="1"><?php $this->printsizeselect($this->opts['ss3']); ?></select> pixels..
-	 	
-	 		<h4>Ads for multiple Pages (archives, homepage etc.)</h4>
-	 		<input type="checkbox" name="oneclick[multi1]" <?php if($this->opts['multi1']) echo("checked");?>>Show 1st Ad with first post of page with <select name="oneclick[ms1]" size="1"><?php $this->printsizeselect($this->opts['ms1']); ?></select> pixels..
-	 		<br><input type="checkbox" name="oneclick[multi2]" <?php if($this->opts['multi2']) echo("checked");?>>Show 2nd Ad right of 4th Post with <select name="oneclick[ms2]" size="1"><?php $this->printsizeselect($this->opts['ms2']); ?></select> pixels..
-	 	
-	 	
-	 		<br><input type="checkbox" name="oneclick[multi3]" <?php if($this->opts['multi3']) echo("checked");?>>Show 3rd Ad with 10th post on page with <select name="oneclick[ms3]" size="1"><?php $this->printsizeselect($this->opts['ms3']); ?></select> pixels..
-	
-		
-	 			 	
-	 		</div>
-	   	 <div class="submit">
-        	<input type="submit" name="oneclickintelliads_update" value="<?php _e('Update options'); ?> &raquo;" />
-    		</div>
-    </form>
-  </div>
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-<script type="text/javascript">toggleMoreopts();</script>
 
-<?php
- } function printsizeselect($act) {
-  	foreach($this->sizes as $size) { 
-  		echo ('<option value="'.$size['text'].'"'); 
-  		if($act==$size['text']) echo(" selected"); 
-  		echo('>'.$size['desc'].'</option>'); 
-  		} 
-  	} 
-  function filter_content($content){ 
-  	global $id,$user_level; 
-  	if (is_single() or is_page()) { 
-  		if ($this->opts['single3']) {
-  			$a= $this->findNodes($content); 
-  			$cnt=round(count($a)/2); 
-  			$pos=$a[$cnt-1][1]; 
-  				if (strlen($content) > $this->opts['lenForThirdAd']) { 
-  				$content= substr_replace($content, $this->build_ad($this->opts['ss3'],"left"), $pos, 0); 
-  				} 
-  		} 
-  		if ($this->opts['single1']) {
-  		$content = $this->build_ad($this->opts['ss1'],"right").$content;
-  		} 
-  		if ($this->opts['single2']) {
-  		$content = $content.$this->build_ad($this->opts['ss2'],"center");
-  		} return $content; 
-  	} 
-  	$this->postcount += 1; 
-  	if ($this->opts['multi2'] AND $this->postcount == 3) {
-  		$content = $this->build_ad($this->opts['ms2'],"right").$content;
-  	} 
-  	if ($this->opts['multi1'] AND $this->postcount == 1) {
-  	$content = $this->build_ad($this->opts['ms1'],"center").$content;
-  	} 
-  	if ($this->opts['multi3'] AND $this->postcount == 10) {
-  	$content = $content.$this->build_ad($this->opts['ms3'],"center");
-  	} return $content; 
-  } 
-  function findNodes($str) {
-   $pattern='&\[gallery\]|\<\/p*\>|\<br\>|\<br\s\/\>|\<br\/\>&iU'; 
-   return preg_split($pattern, $str, 0, PREG_SPLIT_OFFSET_CAPTURE); 
-   } 
-   function build_ad($dim, $align="center") {
-    global $user_level; 
-    $i=$this->opts['gen_id']; 
-    $c=$this->opts['gen_channel']; 
-    $dims=explode("x",$dim); 
-    $width=$dims[0]; 
-    $height=$dims[1]; 
-    $border=$this->opts['border']; 
-    $bg=$this->opts['bg']; 
-    $text=$this->opts['text']; 
-    $url=$this->opts['url']; 
-    $code = '<script type="text/javascript">
-    	var server_client_id = "'.$i.'"; 
-    	var server_ad_channel ="'.$c.'";
-    	var server_publisher_channels = "";
-    	var server_media_types = "text,hybrid";
-    	var server_integrate_media_types = 0;
-    	var server_ad_width = '.$width.'; 
-    	var server_ad_height = '.$height.';
-	var server_ad_style = "'.$dim.'_as"; 
-	var server_code_version = "4";
-	var server_ad_color_border = "'.$border.'";
-	var server_ad_color_background = "'.$bg.'";
-	var server_ad_color_headline = "'.$link.'";
-	var server_ad_color_body = "'.$text.'";
-	var server_ad_color_url = "'.$url.'"; 
-	var server_ad_random = 1;
-	</script>
-	<script type="text/javascript" src="http://ppc.intellichristian.com/ads/display_ads.php"></script>'; 
-	switch ($align) { 
-	case "center": 
-		$code='<div style="padding:7px; display: block; margin-left: auto; margin-right: auto; text-align: center;">'.$code.'</div>'; 
-	break; 
-	case "left": 
-	$code='<div style="padding:7px; float: left; padding-left: 0px; margin: 3px;">'.$code.'</div>';
-	break; 
-	case "right": $code='<div style="padding:7px; float: right; padding-right: 0; margin: 3px;">'.$code.'</div>'; 
-	break; 
-	} 
-	return $code; 
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+*/
+
+global $QData;
+$QData['AdsWid'] = 3; /* Ads on Widget */
+$QData['Ads'] = 3; /* Ads on Post body */
+$QData['Name'] = 'IntelliAds';
+$QData['Version'] = '1.2';
+$QData['URI'] = 'http://ppc.intellichristian.com';
+$QData['AdsWidName'] = 'AdsWidget%d (IntelliAds)';
+$QData['Default'] = array(
+
+	'AdsDisp'=>'3',
+	'BegnAds'=>true,'BegnRnd'=>'1','EndiAds'=>true,'EndiRnd'=>'0','MiddAds'=>false,'MiddRnd'=>'0','MoreAds'=>false,'MoreRnd'=>'0',
+	'Par1Ads'=>false,'Par1Rnd'=>'0','Par1Nup'=>'0','Par1Con'=>false,
+	'Par2Ads'=>false,'Par2Rnd'=>'0','Par2Nup'=>'0','Par2Con'=>false,
+	'Par3Ads'=>false,'Par3Rnd'=>'0','Par3Nup'=>'0','Par3Con'=>false,
+	'Img1Ads'=>false,'Img1Rnd'=>'0','Img1Nup'=>'0',
+	'AppPost'=>true,'AppPage'=>true,'AppHome'=>false,'AppCate'=>false,'AppArch'=>false,'AppTags'=>false,'AppMaxA'=>false,'AppSide'=>false,'AppLogg'=>false,
+	'QckTags'=>true,'QckRnds'=>false,'QckOffs'=>false
+
+); 
+
+$QData['DefaultAdsOpt'] = array(
+
+	'AdsMargin'=>'10','AdsAlign'=>'2'
+
+);	
+
+$QData['DefaultAdsName'] = array();
+
+for ($i=1;$i<=$QData['Ads'];$i++) { 
+
+	array_push($QData['DefaultAdsName'], 'AdsCode'.$i );
+	array_push($QData['DefaultAdsName'], 'AdsAlign'.$i );
+	array_push($QData['DefaultAdsName'], 'AdsMargin'.$i );
+
+};
+
+for ($i=1;$i<=$QData['AdsWid'];$i++) { 
+
+	array_push($QData['DefaultAdsName'], 'WidCode'.$i );	
+
+};	
+
+
+
+function ads_admin_page_inc() { 
+
+	include('intelliads-admin.php');
+
 } 
-function debug() { 
-if(!isset($_GET['oneclickdebug'])) return; 
-	$this->save_opts(); 
-	echo ("<hr><h1> IntelliAds Debugging</h1>"); 
-	echo ('<table>'); 
-	echo ('<tr><td>Version of Plugin</td><td>'.$this->version.'</td></tr>'); 
-	echo ('<tr><td>type of page</td><td>'); 
-	if (is_single()) echo ("single."); 
-	if (is_page()) echo ("page."); 
-	if (is_home()) echo ("home."); 
-	if (is_archive()) echo ("archive."); 
-	if (is_search()) echo ("search."); 
-	if (is_tag()) echo ("tag."); 
-	if (is_date()) echo ("date."); 
-	if (is_author()) echo ("author."); 
-	if (is_category()) echo ("category."); 
-	echo ('</td></tr>'); 
-	$this->arrayAsTable($this->opts, "setting:"); 
-	echo ('</table>'); 
-	} 
-function arrayAsTable($array, $pre) { 
-foreach($array as $key=>$val) { 
-	if (is_array($val)) $this->arrayAsTable($val,$pre.$key.":"); 
-	else echo ('<tr><td>'.$pre.$key.'</td><td>'.$val.'</td></tr>'); 
-	} 
-	}  
-	} 
-	} 
-	$oneclickintelliads = new oneclickintelliads(); 
-	add_action('shutdown', array($oneclickintelliads, 'debug')); 
-	function oneclickintelliads_menu() { global $oneclickintelliads; 
-	if (function_exists('add_options_page')) { 
-	add_options_page('IntelliAds', 'IntelliAds', 'administrator', __FILE__, array(&$oneclickintelliads, 'admin_menu')); 
-	} 
-	} if (is_admin()) { 
-	add_action('admin_menu', 'oneclickintelliads_menu'); 
-	} if (!is_admin()) { 
-	add_filter('the_content', array($oneclickintelliads, 'filter_content')); add_filter('the_excerpt', array($oneclickintelliads, 'filter_content')); 
-	} ?>
+
+function ads_admin_page() {  
+
+	add_options_page("IntelliAds Options", "IntelliAds", 8, basename(__FILE__), "ads_admin_page_inc");  
+
+} 
+
+function register_ads_settings() {
+
+	global $QData;
+	foreach ($QData['Default'] as $key => $value) {
+
+		register_setting( 'qa-options', $key);
+
+	}			
+
+	foreach ($QData['DefaultAdsName'] as $key => $value) {
+
+		register_setting( 'qa-options', $value);
+
+	}		
+
+}
+
+if(is_admin()) {
+
+	add_action('admin_menu', 'ads_admin_page');
+	add_action('admin_init', 'register_ads_settings');
+
+}	
+
+function ads_plugin_links($links,$file) {
+
+	if($file==plugin_basename(__FILE__)) {
+
+		array_unshift($links,'<a href="options-general.php?page='.basename(__FILE__).'">'.__('Setting').'</a>');
+
+	}
+
+	return $links;
+
+}
+
+add_filter('plugin_action_links','ads_plugin_links',10,2);
+
+function plugin_activated() {
+
+	global $QData;
+	$isold = get_option('AdsDisp');	
+	if ( !$isold  && is_bool($isold) ) {
+
+		foreach ($QData['Default'] as $key => $value) {
+
+			update_option($key , $value);
+
+		}		
+
+		for ($i=1;$i<=$QData['Ads'];$i++) {
+
+			update_option('AdsMargin'.$i, $QData['DefaultAdsOpt']['AdsMargin']);
+			update_option('AdsAlign'.$i, $QData['DefaultAdsOpt']['AdsAlign']);
+
+		}		
+
+	}	
+
+}
+
+register_activation_hook( __FILE__, 'plugin_activated' );
+$wpvcomp = (bool)(version_compare($wp_version, '3.1', '>='));
+
+function ads_head_java() { 
+
+	global $QData; 
+	global $wpvcomp; 
+	if (get_option('QckTags')) { ?>
+	<script type="text/javascript">
+		wpvcomp = <?php echo(($wpvcomp==1)?"true":"false"); ?>;
+		edaddID = new Array();
+		edaddNm = new Array();
+		if(typeof(edButtons)!='undefined') {
+
+			edadd = edButtons.length;	
+			var dynads={"all":[
+
+				<?php for ($i=1;$i<=$QData['Ads'];$i++) { if(get_option('AdsCode'.$i)!=''){echo('"1",');}else{echo('"0",');}; } ?>
+
+			"0"]};
+
+			for(i=1;i<=<?php echo($QData['Ads']) ?>;i++) {
+
+				if(dynads.all[i-1]=="1") {
+
+					edButtons[edButtons.length]=new edButton("ads"+i.toString(),"Ads"+i.toString(),"\n<!--Ads"+i.toString()+"-->\n","","",-1);
+					edaddID[edaddID.length] = "ads"+i.toString();
+					edaddNm[edaddNm.length] = "Ads"+i.toString();
+
+				}	
+
+			}
+
+			<?php if(!get_option('QckRnds')){ ?>
+
+				edButtons[edButtons.length]=new edButton("random_ads","RndAds","\n<!--RndAds-->\n","","",-1);
+				edaddID[edaddID.length] = "random_ads";
+				edaddNm[edaddNm.length] = "RndAds";
+
+
+
+			<?php } ?>	
+
+			<?php if(!get_option('QckOffs')){ ?>
+
+				edButtons[edButtons.length]=new edButton("no_ads","NoAds","\n<!--NoAds-->\n","","",-1);
+				edaddID[edaddID.length] = "no_ads";
+				edaddNm[edaddNm.length] = "NoAds";
+				edButtons[edButtons.length]=new edButton("off_def","OffDef","\n<!--OffDef-->\n","","",-1);	
+				edaddID[edaddID.length] = "off_def";
+				edaddNm[edaddNm.length] = "OffDef";
+
+			<?php } ?>
+
+		};
+
+		(function(){
+
+			if(typeof(edButtons)!='undefined' && typeof(jQuery)!='undefined' && wpvcomp){
+
+				jQuery(document).ready(function(){
+
+					for(i=0;i<edaddID.length;i++) {
+
+						jQuery("#ed_toolbar").append('<input type="button" value="' + edaddNm[i] +'" id="' + edaddID[i] +'" class="ed_button" onclick="edInsertTag(edCanvas, ' + (edadd+i) + ');" title="' + edaddNm[i] +'" />');
+
+					}
+
+				});
+
+			}
+
+		}());	
+
+	</script> 
+
+	<?php	}
+
+}
+
+if ($wpvcomp) {
+
+	add_action('admin_print_footer_scripts', 'ads_head_java');
+
+}else{
+
+	add_action('admin_head', 'ads_head_java');
+
+}
+
+
+
+
+
+$ShownAds = 0;
+$AdsId = array();
+$beginend = 0;
+
+
+
+function process_content($content)
+
+{
+
+	global $QData;
+	global $ShownAds;
+	global $AdsId;
+	global $beginend;
+
+	
+
+	/* verifying */ 
+
+	if(	(is_feed()) ||
+
+			(strpos($content,'<!--NoAds-->')) ||
+			(strpos($content,'<!--OffAds-->')) ||
+			(is_single() && !(get_option('AppPost'))) ||
+			(is_page() && !(get_option('AppPage'))) ||
+			(is_home() && !(get_option('AppHome'))) ||			
+			(is_category() && !(get_option('AppCate'))) ||
+			(is_archive() && !(get_option('AppArch'))) ||
+			(is_tag() && !(get_option('AppTags'))) ||
+			(is_user_logged_in() && (get_option('AppLogg'))) ) { 
+
+		$content = clean_tags($content); return $content; 
+
+	}
+
+	
+
+	$AdsToShow = get_option('AdsDisp');
+
+	for($i=1;$i<=$QData['AdsWid'];$i++) {
+
+		$wadsid = sanitize_title(sprintf($QData['AdsWidName'],$i));
+		$AdsToShow -= (is_active_widget(true, $wadsid)) ? 1 : 0 ;
+
+	}		
+
+	if( $ShownAds >= $AdsToShow ) { $content = clean_tags($content); return $content; };
+
+	if( !count($AdsId) ) {  
+
+		for($i=1;$i<=$QData['Ads'];$i++) { 
+
+			$tmp = trim(get_option('AdsCode'.$i));
+
+			if( !empty($tmp) ) {
+
+				array_push($AdsId, $i);
+
+			}
+
+		}
+
+	}	
+
+	if( !count($AdsId) ) { $content = clean_tags($content); return $content; };
+
+
+
+	/* ... Tidy up content ... */
+
+	$offdef = strpos($content,'<!--OffDef-->');
+
+	if( !$offdef ) {
+
+		$AdsIdCus = array();
+		$cusads = 'CusAds'; $cusrnd = 'CusRnd';
+		$more1 = get_option('MoreAds'); $more2 = get_option('MoreRnd');		
+		$begn1 = get_option('BegnAds'); $begn2 = get_option('BegnRnd');
+		$midd1 = get_option('MiddAds'); $midd2 = get_option('MiddRnd');
+		$endi1 = get_option('EndiAds');	$endi2 = get_option('EndiRnd');
+		$rc=3;
+
+		for($i=1;$i<=$rc;$i++) { 
+
+			$para1[$i] = get_option('Par'.$i.'Ads');	$para2[$i] = get_option('Par'.$i.'Rnd');	$para3[$i] = get_option('Par'.$i.'Nup');	$para4[$i] = get_option('Par'.$i.'Con');
+
+		}
+
+		$imge1 = get_option('Img1Ads');	$imge2 = get_option('Img1Rnd');	$imge3 = get_option('Img1Nup');		
+
+		if ( $begn2 == 0 ) { $b1 = $cusrnd; } else { $b1 = $cusads.$begn2; array_push($AdsIdCus, $begn2); };
+		if ( $more2 == 0 ) { $r1 = $cusrnd; } else { $r1 = $cusads.$more2; array_push($AdsIdCus, $more2); };		
+		if ( $midd2 == 0 ) { $m1 = $cusrnd; } else { $m1 = $cusads.$midd2; array_push($AdsIdCus, $midd2); };
+		if ( $endi2 == 0 ) { $b2 = $cusrnd; } else { $b2 = $cusads.$endi2; array_push($AdsIdCus, $endi2); };	
+
+		for($i=1;$i<=$rc;$i++) { 
+
+			if ( $para2[$i] == 0 ) { $b3[$i] = $cusrnd; } else { $b3[$i] = $cusads.$para2[$i]; array_push($AdsIdCus, $para2[$i]); };	
+
+		}	
+
+		if ( $imge2 == 0 ) { $b4 = $cusrnd; } else { $b4 = $cusads.$imge2; array_push($AdsIdCus, $imge2); };	
+
+		if( $midd1 ) {
+
+			if( substr_count(strtolower($content), '</p>')>=2 ) {
+
+				$sch = "</p>";
+				$content = str_replace("</P>", $sch, $content);
+				$arr = explode($sch, $content);			
+				$nn = 0; $mm = strlen($content)/2;
+				for($i=0;$i<count($arr);$i++) {
+
+					$nn += strlen($arr[$i]) + 4;
+
+					if($nn>$mm) {
+
+						if( ($mm - ($nn - strlen($arr[$i]))) > ($nn - $mm) && $i+1<count($arr) ) {
+
+							$arr[$i+1] = '<!--'.$m1.'-->'.$arr[$i+1];							
+
+						} else {
+
+							$arr[$i] = '<!--'.$m1.'-->'.$arr[$i];
+
+						}
+
+						break;
+
+					}
+
+				}
+
+				$content = implode($sch, $arr);
+
+			}	
+
+		}
+
+		if( $more1 ) {
+
+			$mmr = '<!--'.$r1.'-->';
+			$postid = get_the_ID();
+			$content = str_replace('<span id="more-'.$postid.'"></span>', $mmr, $content);		
+
+		}		
+
+		if( $begn1 ) {
+
+			$content = '<!--'.$b1.'-->'.$content;
+
+		}
+
+		if( $endi1 ) {
+
+			$content = $content.'<!--'.$b2.'-->';
+
+		}
+
+		for($i=$rc;$i>=1;$i--) { 
+
+			if ( $para1[$i] ){
+
+				$sch = "</p>";
+				$content = str_replace("</P>", $sch, $content);
+				$arr = explode($sch, $content);
+
+				if ( (int)$para3[$i] < count($arr) ) {
+
+					$content = implode($sch, array_slice($arr, 0, $para3[$i])).$sch .'<!--'.$b3[$i].'-->'. implode($sch, array_slice($arr, $para3[$i]));
+
+				}	elseif ($para4[$i]) {
+
+					$content = implode($sch, $arr).'<!--'.$b3[$i].'-->';
+
+				}
+
+			}
+
+		}	
+
+		if ( $imge1 ){
+
+			$sch = "<img";
+			$bch = ">";
+			$content = str_replace("<IMG", $sch, $content);
+			$arr = explode($sch, $content);
+
+			if ( (int)$imge3 < count($arr) ) {
+
+				$trr = explode($bch, $arr[$imge3]);
+
+				if ( count($trr) ) {
+
+					$arr[$imge3] = implode($bch, array_slice($trr, 0, 1)).$bch. "\n".'<!--'.$b4.'-->'."\n". implode($bch, array_slice($trr, 1));
+
+				}
+
+				$content = implode($sch, $arr);
+
+			}	
+
+		}		
+
+	}
+
+	
+
+	/* ... Tidy up content ... */
+
+	$content = '<!--EmptyClear-->'.$content."\n".'<div style="font-size:0px;height:0px;line-height:0px;margin:0;padding:0;clear:both"></div>';
+
+	$content = clean_tags($content, true);	
+
+	$ismany = (!is_single() && !is_page());
+
+	$showall = get_option('AppMaxA');
+
+	
+
+	/* ... Replace Beginning/Middle/End Ads1-10 ... */
+
+	if( !$offdef ) {
+
+		for( $i=1; $i<=count($AdsIdCus); $i++ ) {
+
+			if( $showall || !$ismany || $beginend != $i ) {
+
+				if( strpos($content, '<!--'.$cusads.$AdsIdCus[$i-1].'-->') && in_array($AdsIdCus[$i-1], $AdsId)) {
+
+					$content = replace_ads( $content, $cusads.$AdsIdCus[$i-1], $AdsIdCus[$i-1] ); $AdsId = del_element($AdsId, array_search($AdsIdCus[$i-1], $AdsId)) ;
+
+					$ShownAds += 1; if( $ShownAds >= $AdsToShow || !count($AdsId) ){ $content = clean_tags($content); return $content; };
+
+					$beginend = $i; if(!$showall && $ismany){break;} 
+
+				}
+
+			}	
+
+		}	
+
+	}
+
+	
+
+	/* ... Replace Ads1 to Ads10 ... */
+
+	if( $showall || !$ismany ) {
+
+		$tcn = count($AdsId); $tt = 0;
+
+		for( $i=1; $i<=$tcn; $i++ ) {
+
+			if( strpos($content, '<!--Ads'.$AdsId[$tt].'-->') ) {
+
+				$content = replace_ads( $content, 'Ads'.$AdsId[$tt], $AdsId[$tt] ); $AdsId = del_element($AdsId, $tt) ;
+
+				$ShownAds += 1; if( $ShownAds >= $AdsToShow || !count($AdsId) ){ $content = clean_tags($content); return $content; };
+
+			} else {
+
+				$tt += 1;
+
+			}
+
+		}	
+
+	}	
+
+
+
+	/* ... Replace Beginning/Middle/End random Ads ... */
+
+	if( strpos($content, '<!--'.$cusrnd.'-->') && ($showall || !$ismany) ) {
+
+		$tcx = count($AdsId);
+
+		$tcy = substr_count($content, '<!--'.$cusrnd.'-->');
+
+		for( $i=$tcx; $i<=$tcy-1; $i++ ) {
+
+			array_push($AdsId, -1);
+
+		}
+
+		shuffle($AdsId);
+
+		for( $i=1; $i<=$tcy; $i++ ) {
+
+			$content = replace_ads( $content, $cusrnd, $AdsId[0] ); $AdsId = del_element($AdsId, 0) ;
+
+			$ShownAds += 1; if( $ShownAds >= $AdsToShow || !count($AdsId) ){ $content = clean_tags($content); return $content; };
+
+		}
+
+	}
+
+	
+
+	/* ... Replace RndAds ... */
+
+	if( strpos($content, '<!--RndAds-->') && ($showall || !$ismany) ) {
+
+		$AdsIdTmp = array();
+
+		shuffle($AdsId);
+
+		for( $i=1; $i<=$AdsToShow-$ShownAds; $i++ ) {
+
+			if( $i <= count($AdsId) ) {
+
+				array_push($AdsIdTmp, $AdsId[$i-1]);
+
+			}
+
+		}
+
+		$tcx = count($AdsIdTmp);
+
+		$tcy = substr_count($content, '<!--RndAds-->');
+
+ 		for( $i=$tcx; $i<=$tcy-1; $i++ ) {
+
+			array_push($AdsIdTmp, -1);
+
+		}
+
+		shuffle($AdsIdTmp);
+
+		for( $i=1; $i<=$tcy; $i++ ) {
+
+			$tmp = $AdsIdTmp[0];
+
+			$content = replace_ads( $content, 'RndAds', $AdsIdTmp[0] ); $AdsIdTmp = del_element($AdsIdTmp, 0) ;
+
+			if($tmp != -1){$ShownAds += 1;}; if( $ShownAds >= $AdsToShow || !count($AdsIdTmp) ){ $content = clean_tags($content); return $content; };
+
+		}
+
+	}	
+
+	
+
+	/* ... That's it. DONE :) ... */
+
+	$content = clean_tags($content); return $content;
+
+}
+
+function clean_tags($content, $trimonly = false) {
+
+	global $QData;
+
+	global $ShownAds;
+
+	global $AdsId;
+
+	global $beginend;
+
+	$tagnames = array('EmptyClear','RndAds','NoAds','OffAds','CusRnd');
+
+	for($i=1;$i<=$QData['Ads'];$i++) { array_push($tagnames, 'CusAds'.$i); array_push($tagnames, 'Ads'.$i); };
+
+	foreach ($tagnames as $tgn) {
+
+		if(strpos($content,'<!--'.$tgn.'-->') || $tgn=='EmptyClear') {
+
+			if($trimonly) {
+
+				$content = str_replace('<p><!--'.$tgn.'--></p>', '<!--'.$tgn.'-->', $content);	
+
+			}else{
+
+				$content = str_replace(array('<p><!--'.$tgn.'--></p>','<!--'.$tgn.'-->'), '', $content);	
+
+			}
+
+		}
+
+	}
+
+	if(!$trimonly && (is_single() || is_page()) ) {
+
+		$ShownAds = 0;
+
+		$AdsId = array();
+
+		$beginend = 0;
+
+	}	
+
+	return $content;
+
+}
+
+function replace_ads($content, $nme, $adn) {
+
+	if( !strpos($content,'<!--'.$nme.'-->') ) { return $content; }	
+
+	global $QData;
+
+	if ($adn != -1) {
+
+		$arr = array('',
+
+			'float:left;margin:%1$dpx %1$dpx %1$dpx 0;',
+
+			'float:none;margin:%1$dpx 0 %1$dpx 0;text-align:center;',
+
+			'float:right;margin:%1$dpx 0 %1$dpx %1$dpx;',
+
+			'float:none;margin:0px;');
+
+		$adsalign = get_option('AdsAlign'.$adn);
+
+		$adsmargin = get_option('AdsMargin'.$adn);
+
+		$style = sprintf($arr[(int)$adsalign], $adsmargin);
+
+		$adscode = get_option('AdsCode'.$adn);
+
+		$adscode =
+
+			"\n".'<!-- '.$QData['Name'].' Wordpress Plugin: '.$QData['URI'].' -->'."\n".
+
+			'<div style="'.$style.'">'."\n".
+
+			$adscode."\n".
+
+			'</div>'."\n";
+
+	} else {
+
+		$adscode ='';
+
+	}	
+
+	$cont = explode('<!--'.$nme.'-->', $content, 2);	
+
+	return $cont[0].$adscode.$cont[1];
+
+}
+
+function del_element($array, $idx) {
+
+  $copy = array();
+
+	for( $i=0; $i<count($array) ;$i++) {
+
+		if ( $idx != $i ) {
+
+			array_push($copy, $array[$i]);
+
+		}
+
+	}	
+
+  return $copy;
+
+}
+
+add_filter('the_content', 'process_content');
+
+
+
+
+
+function ads_widget_register() {
+
+	global $QData;
+
+	if (!function_exists('register_sidebar_widget') || !function_exists('register_widget_control')) { return; };
+
+  for($i=1;$i<=$QData['AdsWid'];$i++) {
+
+		if(get_option('WidCode'.$i)!='') {
+
+			$displaystr =
+
+				'$cont = get_the_content("",0,"");'.
+
+				'if( !strpos($cont,"<!--OffAds-->") && !(is_home()&&get_option("AppSide")) ) {'.
+
+				'extract($args);'.
+
+				'$title = get_option("WidCode-title-'.$i.'");'.
+
+				'$codetxt = get_option("WidCode'.$i.'");'.
+
+				'echo "\n"."<!-- Quick Adsense Wordpress Plugin: http://quicksense.net/ -->"."\n";'.
+
+				'echo $before_widget."\n";'.
+
+				'if (!empty($title)) { '.
+
+				'echo $before_title.$title.$after_title."\n"; '.
+
+				'};'.
+
+				'echo $codetxt;'.
+
+				'echo "\n".$after_widget;'.
+
+				'}';
+
+			$controlstr	=
+
+				'if ($_POST["WidCodeSubmit'.$i.'"]) {'.
+
+				'  update_option_en("WidCode-title-'.$i.'", $_POST["WidCode-title-'.$i.'"], "strip_tags");'.
+
+				'  update_option_en("WidCode'.$i.'", $_POST["WidCode'.$i.'"]);'.
+
+				'}'.
+
+				'$title = get_option_en("WidCode-title-'.$i.'");'.
+
+				'$codetxt = get_option_en("WidCode'.$i.'");'.
+
+				'echo "<p><label>'.__('Title:').'</label>";'.
+
+				'echo "<input style=\"width:100%;\" id=\"WidCode-title-'.$i.'\" name=\"WidCode-title-'.$i.'\" type=\"text\" value=\"".$title."\" />";'.
+
+				'echo "<p><textarea style=\"width:100%;height:150px;\" id=\"WidCode'.$i.'\" name=\"WidCode'.$i.'\">".$codetxt."</textarea><br\>";'.
+
+				'echo "<a style=\"font-size:8pt;text-decoration:none\" href=\"options-general.php?page='.basename(__FILE__).'\">'.__('Quick Adsense Setting').'</a></p>";'.
+
+				'echo "<input type=\"hidden\" id=\"WidCodeSubmit'.$i.'\" name=\"WidCodeSubmit'.$i.'\" value=\"true\" />";';
+
+			$displaycall[$i] = create_function('$args', $displaystr);
+
+			$controlcall[$i] = create_function('', $controlstr);
+
+			$wadsid = sprintf($QData['AdsWidName'],$i);
+
+			register_sidebar_widget($wadsid, $displaycall[$i], "adswidget");
+
+			register_widget_control($wadsid, $controlcall[$i]);
+
+		}			
+
+	}
+
+}	
+
+function get_option_en($nameid)
+
+{
+
+	$txt = get_option($nameid);
+
+	$txt = htmlspecialchars($txt, ENT_QUOTES);
+
+	if(!empty($txt)) { return $txt; }else{ return ""; };
+
+}
+
+function update_option_en($nameid, $text, $opt='')
+
+{
+
+	$txt = stripslashes($text);
+
+	if ($opt=='strip_tags') { $txt = strip_tags($txt); };
+
+	update_option($nameid, $txt);
+
+	if(!empty($txt)) { return $txt; }else{ return ""; };
+
+}
+
+add_action('init', 'ads_widget_register');
+
+?>
