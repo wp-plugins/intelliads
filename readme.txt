@@ -32,8 +32,7 @@ The widget will install all the code you will need to add.
 It will install a small 180X150 ad block which displays a message inviting advertisers to advertise on your site.
 
 
-Any questions or problems with the plugin? Leave them in the comments below, and I will answer them as soon as possible.
-
+Any questions or problems with the plugin? Visit http://djalexplugins.weebly.com for support
 == Installation ==
 
 1. Upload `intelliads` folder to the `/wp-content/plugins/` directory .
@@ -41,4 +40,4 @@ Any questions or problems with the plugin? Leave them in the comments below, and
 3. Settings can be configured under the 'Settings' tab in your dashboard.
 
 
-Support can be found at djalexplugins.weebly.com
+Support can be found at http://djalexplugins.weebly.com
