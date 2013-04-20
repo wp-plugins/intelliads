@@ -5,10 +5,10 @@
 /* 
 
 	Plugin Name: IntelliChristian! Ads, Affiliate Program, and Link Exchange
-	Plugin URI: http://wordpress.org/intelliads
-	Description: Insert IntelliChristian! Ads into various places in your blog posts
+	Plugin URI: http://djalexplugins.weebly.com
+	Description: Widgets for IntelliChristian Ads, Affiliate Program, and Link Exchange
 	Author: DJ Alex
-	Version: 1.2
+	Version: 2.1.1
 	Author URI: http://djalexplugins.weebly.com
 
 */
