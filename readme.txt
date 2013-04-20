@@ -5,7 +5,7 @@ Requires at least: 2.5
 Tested up to: 3.5.1
 Stable tag: 2.0
 
-Version 2.0 adds three new modules to the IntelliAds plugin, and greatly simplifies the process of adding the ad code for IntelliChristian ads.
+Version 2.0 adds three new modules to the IntelliAds plugin, and greatly simplifies the process of adding the ad code for IntelliChristian! ads.
 
 IntelliChristian! Affiliate program Widget
 
