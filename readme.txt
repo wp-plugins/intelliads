@@ -41,3 +41,4 @@ Any questions or problems with the plugin? Leave them in the comments below, and
 3. Settings can be configured under the 'Settings' tab in your dashboard.
 
 
+Support can be found at djalexplugins.weebly.com
