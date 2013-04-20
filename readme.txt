@@ -3,7 +3,7 @@ Contributors: DJ Alex
 Tags: intellichristian payperclick ads,christian ads,christian advertising,christian payperclick,ads,advertising,adsense alternative,christian affiliate program,christian link exchange,affiliate program,link exchange
 Requires at least: 2.5
 Tested up to: 3.5.1
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 
 Version 2 adds three new modules to the IntelliAds plugin, and greatly simplifies the process of adding the ad code for IntelliChristian! ads.
 

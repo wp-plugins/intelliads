@@ -8,7 +8,7 @@
 	Plugin URI: http://djalexplugins.weebly.com
 	Description: Widgets for IntelliChristian Ads, Affiliate Program, and Link Exchange
 	Author: DJ Alex
-	Version: 2.1.1
+	Version: 2.1.2
 	Author URI: http://djalexplugins.weebly.com
 
 */
