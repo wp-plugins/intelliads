@@ -308,8 +308,4 @@ if ($wpvcomp) {
 	add_action('admin_head', 'ads_head_java');
 
 }
-
-
 ?>
-
-
